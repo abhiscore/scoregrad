@@ -6,120 +6,121 @@
   <title>ScoreGrad | Coming Soon</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Reset & body */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
+      margin: 0;
       font-family: 'Inter', sans-serif;
       height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #1e1e2f, #2a2a3f);
+      overflow: hidden;
       color: #ffffff;
-      text-align: center;
+      background: #0a0a0a;
     }
 
-    /* Logo / Title */
+    /* Animated gradient background */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      background: linear-gradient(270deg, #0ff, #6a5cff, #ff00ff, #00ff9f);
+      background-size: 800% 800%;
+      z-index: -1;
+      animation: gradientBG 20s ease infinite;
+      filter: blur(80px);
+    }
+
     h1 {
-      font-size: 3rem;
+      font-size: 4rem;
       font-weight: 700;
       margin-bottom: 1rem;
-      background: linear-gradient(90deg, #00d4ff, #6a5cff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
 
-    /* Subtitle */
     p {
       font-size: 1.3rem;
       margin-bottom: 2rem;
       opacity: 0.85;
     }
 
-    /* Loader */
-    .loader {
-      border: 4px solid rgba(255, 255, 255, 0.2);
-      border-top: 4px solid #00d4ff;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-      margin-bottom: 2rem;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Navigation */
-    nav {
-      margin-bottom: 2rem;
-    }
-    nav a {
-      text-decoration: none;
-      color: #ffffff;
-      margin: 0 15px;
-      font-weight: 600;
+    .btn {
+      padding: 12px 30px;
+      margin: 5px;
+      font-weight: bold;
+      border: 2px solid #0ff;
+      color: #0ff;
+      background: transparent;
+      border-radius: 8px;
+      cursor: pointer;
       transition: 0.3s;
     }
-    nav a:hover {
-      color: #00d4ff;
+    .btn:hover {
+      background: #0ff;
+      color: #000;
+    }
+
+    /* Typing effect */
+    .typed-text {
+      color: #ff0;
+      font-weight: 700;
+      font-size: 1.5rem;
     }
 
     /* Social links */
+    .socials {
+      margin-top: 20px;
+    }
     .socials a {
       margin: 0 10px;
       color: #ffffff;
       text-decoration: none;
-      font-weight: 500;
-      opacity: 0.8;
       transition: 0.3s;
     }
-    .socials a:hover {
-      color: #6a5cff;
-      opacity: 1;
-    }
+    .socials a:hover { color: #0ff; }
 
-    /* Footer */
-    footer {
-      position: absolute;
-      bottom: 20px;
-      font-size: 0.85rem;
-      opacity: 0.7;
-    }
-
-    /* Fade-in animation */
-    body > * {
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-    }
-    body > *:nth-child(1) { animation-delay: 0.3s; }
-    body > *:nth-child(2) { animation-delay: 0.6s; }
-    body > *:nth-child(3) { animation-delay: 0.9s; }
-    body > *:nth-child(4) { animation-delay: 1.2s; }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
   </style>
 </head>
 <body>
+
   <h1>ScoreGrad</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <p>Our platform is under development. Stay tuned for updates!</p>
-  <div class="loader"></div>
+  <p class="typed-text"></p>
+  <button class="btn" onclick="alert('Subscribed!')">Subscribe</button>
+  <button class="btn" onclick="alert('Learn More Coming Soon!')">Learn More</button>
 
   <div class="socials">
-    <a href="mailto:abhishek@scoregrad.com">Email</a>
+    <a href="mailto:contact@scoregrad.com">Email</a>
     <a href="https://www.instagram.com/scoregrad" target="_blank">Instagram</a>
     <a href="https://www.linkedin.com/company/scoregrad" target="_blank">LinkedIn</a>
   </div>
 
-  <footer>© 2025 ScoreGrad. All rights reserved.</footer>
+  <script>
+    // Typing effect
+    const texts = ["The Future of Learning.", "Interactive Courses.", "Your Growth Partner."];
+    let count = 0;
+    let index = 0;
+    let currentText = '';
+    let letter = '';
+
+    (function type(){
+      if(count === texts.length) count = 0;
+      currentText = texts[count];
+      letter = currentText.slice(0, ++index);
+
+      document.querySelector(".typed-text").textContent = letter;
+      if(letter.length === currentText.length){
+        count++;
+        index = 0;
+        setTimeout(type, 1500); // pause between phrases
+      } else {
+        setTimeout(type, 100);
+      }
+    }());
+  </script>
+
 </body>
 </html>
