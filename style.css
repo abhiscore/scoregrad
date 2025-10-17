@@ -1,4 +1,4 @@
-/* Global */
+/* ---------- Global Styles ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -9,10 +9,15 @@
 body {
   background: #1f1c2c;
   color: #fff;
-  min-height: 100vh;
+  line-height: 1.6;
 }
 
-/* Navbar */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ---------- Navbar ---------- */
 .navbar {
   width: 100%;
   display: flex;
@@ -21,9 +26,9 @@ body {
   padding: 20px 70px;
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(31, 28, 44, 0.8);
+  background: rgba(31,28,44,0.85);
   backdrop-filter: blur(10px);
+  z-index: 100;
 }
 
 .logo {
@@ -42,8 +47,6 @@ body {
 }
 
 .navbar ul li a {
-  color: #fff;
-  text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
 }
@@ -61,7 +64,7 @@ body {
   font-weight: 600;
 }
 
-/* Hero */
+/* ---------- Hero ---------- */
 .hero {
   display: flex;
   justify-content: center;
@@ -88,7 +91,6 @@ body {
   padding: 12px 30px;
   border-radius: 8px;
   font-weight: 600;
-  text-decoration: none;
   transition: 0.3s;
 }
 
@@ -96,17 +98,32 @@ body {
   background: #00a7c7;
 }
 
-/* Features */
-.features {
+/* ---------- Cards ---------- */
+.card, .course-card, .testimonial-card {
+  background: rgba(255,255,255,0.05);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover, .course-card:hover, .testimonial-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,212,255,0.3);
+}
+
+/* ---------- Sections ---------- */
+section {
   padding: 80px 10%;
   text-align: center;
 }
 
-.features h2 {
+section h2 {
   margin-bottom: 50px;
   color: #00d4ff;
 }
 
+/* Feature Cards */
 .feature-cards {
   display: flex;
   justify-content: space-around;
@@ -114,50 +131,12 @@ body {
   gap: 20px;
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 30px;
-  border-radius: 20px;
-  width: 250px;
-  backdrop-filter: blur(10px);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0,212,255,0.3);
-}
-
 /* Courses */
-.courses {
-  padding: 80px 10%;
-  text-align: center;
-}
-
-.courses h2 {
-  margin-bottom: 50px;
-  color: #00d4ff;
-}
-
 .course-cards {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 20px;
-}
-
-.course-card {
-  width: 250px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 15px;
-  backdrop-filter: blur(10px);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.course-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0,212,255,0.3);
 }
 
 .course-card img {
@@ -167,16 +146,6 @@ body {
 }
 
 /* Testimonials */
-.testimonials {
-  padding: 80px 10%;
-  text-align: center;
-}
-
-.testimonials h2 {
-  margin-bottom: 50px;
-  color: #00d4ff;
-}
-
 .testimonial-cards {
   display: flex;
   justify-content: space-around;
@@ -184,32 +153,51 @@ body {
   gap: 20px;
 }
 
-.testimonial-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 30px;
-  border-radius: 20px;
-  width: 250px;
-  backdrop-filter: blur(10px);
+.testimonial-card p {
   font-style: italic;
-  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0,212,255,0.3);
+/* ---------- Forms ---------- */
+.form-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 40px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  text-align: center;
 }
 
-/* Footer */
+.form-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.form-container input::placeholder {
+  color: #ccc;
+}
+
+.form-container button {
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* ---------- Footer ---------- */
 footer {
   text-align: center;
   padding: 20px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255,255,255,0.2);
   color: #aaa;
   margin-top: 40px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ---------- Responsive ---------- */
+@media(max-width:768px){
   .feature-cards, .course-cards, .testimonial-cards {
     flex-direction: column;
     align-items: center;
