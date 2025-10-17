@@ -15,12 +15,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Protect the page
+// =================== PROTECT DASHBOARD ===================
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById("username").textContent = user.email.split("@")[0];
   } else {
-    window.location.href = "index.html";
+    window.location.href = "login.html"; // redirect if not logged in
   }
 });
 
@@ -28,7 +28,7 @@ onAuthStateChanged(auth, (user) => {
 document.getElementById("logoutBtn").addEventListener("click", () => {
   signOut(auth).then(() => {
     alert("Logged out successfully!");
-    window.location.href = "index.html";
+    window.location.href = "login.html";
   }).catch((error) => {
     alert("Error logging out: " + error.message);
   });
