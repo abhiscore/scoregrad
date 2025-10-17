@@ -1,9 +1,8 @@
-// Import Firebase modular SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-// Firebase configuration
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
   authDomain: "myscoregrad.firebaseapp.com",
@@ -19,53 +18,61 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Protect dashboard: only logged-in users
+// Protect dashboard
 onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "index.html"; // redirect if not logged in
-  } else {
-    try {
-      const coursesSnapshot = await getDocs(collection(db, "courses"));
-      const coursesContainer = document.getElementById("courses");
-
-      if (coursesSnapshot.empty) {
-        coursesContainer.innerHTML = "<p>No courses available yet.</p>";
-      } else {
-        coursesContainer.innerHTML = "";
-        coursesSnapshot.forEach(doc => {
-          const data = doc.data();
-          coursesContainer.innerHTML += `
-            <div class="course">
-              <h3>${data.title}</h3>
-              <p>${data.description}</p>
-              <iframe 
-                src="https://www.youtube.com/embed/${data.videoUrl}" 
-                title="${data.title}" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
-            </div>
-          `;
-        });
-      }
-
-      console.log("Fetched courses:", coursesSnapshot.docs.length);
-    } catch (err) {
-      console.error("Error fetching courses:", err);
-      document.getElementById("courses").innerHTML = "<p>Failed to load courses.</p>";
-    }
-  }
+  if (!user) window.location.href = "index.html";
+  else loadCourses();
 });
 
-// Logout function
+// Logout
 window.logout = function() {
-  signOut(auth)
-    .then(() => {
-      alert("Logged out successfully!");
-      window.location.href = "index.html";
-    })
-    .catch(err => {
-      console.error("Logout error:", err);
-      alert("Error logging out. Try again.");
+  signOut(auth).then(() => window.location.href = "index.html");
+};
+
+// Load courses dynamically
+async function loadCourses() {
+  const coursesContainer = document.getElementById("courses");
+  coursesContainer.innerHTML = "";
+  try {
+    const snapshot = await getDocs(collection(db, "courses"));
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      const card = document.createElement("div");
+      card.className = "course";
+      card.innerHTML = `
+        <img src="https://img.youtube.com/vi/${data.videoUrl}/hqdefault.jpg" alt="${data.title}">
+        <div class="course-content">
+          <h3>${data.title}</h3>
+          <p>${data.description}</p>
+          <button onclick="openModal('${data.videoUrl}')">Play</button>
+        </div>
+      `;
+      coursesContainer.appendChild(card);
     });
+  } catch(err) {
+    coursesContainer.innerHTML = "<p>Failed to load courses.</p>";
+    console.error(err);
+  }
+}
+
+// Video modal
+const modal = document.getElementById("video-modal");
+const modalVideo = document.getElementById("modal-video");
+const closeBtn = document.querySelector(".close-btn");
+
+window.openModal = function(videoId) {
+  modalVideo.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  modal.style.display = "flex";
+};
+
+closeBtn.onclick = function() {
+  modalVideo.src = "";
+  modal.style.display = "none";
+};
+
+window.onclick = function(e) {
+  if(e.target == modal) {
+    modalVideo.src = "";
+    modal.style.display = "none";
+  }
 };
