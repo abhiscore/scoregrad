@@ -1,52 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ScoreGrad Dashboard</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-<!-- External CSS -->
-<link rel="stylesheet" href="dashboard.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScoreGrad Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <h2 class="logo">📘 ScoreGrad</h2>
+      <ul class="menu">
+        <li class="active">🏠 Home</li>
+        <li>📚 Courses</li>
+        <li>📝 Notes</li>
+        <li>📈 Progress</li>
+        <li>🎥 Live Class</li>
+        <li>⚙️ Settings</li>
+      </ul>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </aside>
 
-<header>
-  <div class="logo">ScoreGrad</div>
-  <nav>
-    <a href="#">Dashboard</a>
-    <a href="#">Courses</a>
-    <a href="#">Profile</a>
-    <button id="logout-btn" onclick="logout()">Logout</button>
-  </nav>
-</header>
+    <main class="main-content">
+      <header class="header">
+        <div class="profile">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" />
+          <div>
+            <h3 id="userName">Welcome, Student</h3>
+            <p>Let's learn something new today!</p>
+          </div>
+        </div>
+        <button id="themeToggle" class="theme-btn">🌙</button>
+      </header>
 
-<main>
-  <!-- Featured Courses Carousel (optional) -->
-  <section id="featured-courses">
-    <h2>Featured Courses</h2>
-    <div class="carousel">
-      <!-- Dynamically inserted featured courses -->
-    </div>
-  </section>
+      <section class="continue-section">
+        <h2>▶ Continue Watching</h2>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/HYb4FGDTBmw" allowfullscreen></iframe>
+        </div>
+      </section>
 
-  <!-- All Courses Grid -->
-  <section id="courses">
-    <!-- Dynamically inserted course cards -->
-  </section>
-</main>
+      <section class="course-section">
+        <h2>📘 Learn Physics from Scratch</h2>
+        <div class="video-grid">
+          <iframe src="https://www.youtube.com/embed/HYb4FGDTBmw" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/GNrdg3PzpJQ" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/zsXOFPsZ7B0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/KtQw5zpt3cA" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/6YLe3t4xhTg" allowfullscreen></iframe>
+        </div>
+      </section>
 
-<!-- Video Modal -->
-<div id="video-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
+      <section class="notes-section">
+        <h2>📝 Notes & PDFs</h2>
+        <ul>
+          <li><a href="#">Physics Chapter 1 - Units & Measurements (PDF)</a></li>
+          <li><a href="#">Physics Chapter 2 - Motion in One Dimension (PDF)</a></li>
+          <li><a href="#">Physics Chapter 3 - Laws of Motion (PDF)</a></li>
+        </ul>
+      </section>
+
+      <section class="progress-section">
+        <h2>📈 Your Progress</h2>
+        <div class="progress-bar">
+          <div class="progress" style="width: 45%;"></div>
+        </div>
+        <p>45% Completed</p>
+      </section>
+
+      <section class="live-section">
+        <h2>🎥 Upcoming Live Class</h2>
+        <div class="live-card">
+          <p><strong>Topic:</strong> Newton’s Laws of Motion</p>
+          <p><strong>Starts in:</strong> <span id="countdown">Loading...</span></p>
+        </div>
+      </section>
+    </main>
   </div>
-</div>
 
-<!-- Firebase + JS -->
-<script type="module" src="dashboard.js"></script>
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="dashboard.js"></script>
 </body>
 </html>
