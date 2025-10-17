@@ -1,10 +1,26 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   background: linear-gradient(135deg, #1e1e2f, #3e3e5e);
   color: #fff;
   margin: 0;
   padding: 0;
   text-align: center;
+}
+
+header {
+  padding: 20px;
+  background: rgba(0,0,0,0.3);
+}
+
+nav a {
+  margin: 0 10px;
+  color: #00bfff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
 }
 
 input {
@@ -22,6 +38,7 @@ button {
   background-color: #00bfff;
   color: #fff;
   cursor: pointer;
+  font-weight: bold;
 }
 
 button:hover {
@@ -30,9 +47,20 @@ button:hover {
 
 .course {
   border: 1px solid #00bfff;
-  padding: 10px;
-  margin: 10px auto;
+  padding: 15px;
+  margin: 15px auto;
   max-width: 400px;
   border-radius: 10px;
   background-color: rgba(0, 191, 255, 0.1);
+  transition: transform 0.3s;
+}
+
+.course:hover {
+  transform: scale(1.05);
+}
+
+footer {
+  padding: 20px;
+  background: rgba(0,0,0,0.3);
+  margin-top: 20px;
 }
