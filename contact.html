@@ -1,27 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact - ScoreGrad</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | ScoreGrad</title>
+  <link rel="stylesheet" href="contact.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e0bf0a46.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <h1>Contact ScoreGrad</h1>
+  <header class="navbar">
+    <div class="logo">ScoreGrad</div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
     </nav>
   </header>
 
-  <main>
-    <p>Email: support@scoregrad.com</p>
-    <p>Phone: +91 12345 67890</p>
-  </main>
+  <section class="contact-container">
+    <div class="contact-info">
+      <h1>Contact <span>Us</span></h1>
+      <p>We’d love to hear from you! Whether you have questions about our courses, pricing, or anything else, our team is ready to answer all your queries.</p>
+
+      <div class="info-box">
+        <i class="fas fa-envelope"></i>
+        <div>
+          <h3>Email</h3>
+          <p>support@scoregrad.com</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <i class="fas fa-phone-alt"></i>
+        <div>
+          <h3>Phone</h3>
+          <p>+91 98765 43210</p>
+        </div>
+      </div>
+
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <form id="contactForm">
+        <h2>Send a Message</h2>
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email Address" required />
+        <textarea rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
 
   <footer>
-    <p>&copy; 2025 ScoreGrad</p>
+    <p>© 2025 ScoreGrad. All rights reserved.</p>
   </footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert("Thanks for contacting ScoreGrad! We'll get back to you soon.");
+    });
+  </script>
 </body>
 </html>
