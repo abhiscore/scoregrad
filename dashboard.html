@@ -7,16 +7,33 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo">ScoreGrad</div>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="dashboard.html" class="active">Dashboard</a></li>
-      <li><a href="login.html" id="logout-btn">Logout</a></li>
+      <li>Welcome, <span id="username">User</span></li>
+      <li><button id="themeToggle">🌙</button></li>
+      <li><button id="logoutBtn">Logout</button></li>
     </ul>
   </nav>
 
-  <!-- Physics Section -->
+  <!-- LIVE CLASS TIMER -->
+  <section class="live-class">
+    <h2>Next Live Class:</h2>
+    <div id="liveTimer" class="timer">Loading...</div>
+  </section>
+
+  <!-- PROGRESS BAR -->
+  <section class="progress-section">
+    <h2>Course Progress</h2>
+    <div id="progressBarContainer">
+      <div id="progressBar"></div>
+    </div>
+  </section>
+
+  <!-- VIDEOS SECTIONS -->
+
+  <!-- Physics -->
   <section>
     <h2>Physics Lessons</h2>
     <div class="course-cards">
@@ -35,7 +52,7 @@
     </div>
   </section>
 
-  <!-- Chemistry Section -->
+  <!-- Chemistry -->
   <section>
     <h2>Chemistry Lessons</h2>
     <div class="course-cards">
@@ -54,7 +71,7 @@
     </div>
   </section>
 
-  <!-- Biology Section -->
+  <!-- Biology -->
   <section>
     <h2>Biology Lessons</h2>
     <div class="course-cards">
@@ -73,7 +90,7 @@
     </div>
   </section>
 
-  <!-- Mathematics Section -->
+  <!-- Mathematics -->
   <section>
     <h2>Mathematics Lessons</h2>
     <div class="course-cards">
@@ -92,6 +109,6 @@
     &copy; 2025 ScoreGrad. All Rights Reserved.
   </footer>
 
-  <script src="dashboard.js"></script>
+  <script type="module" src="dashboard.js"></script>
 </body>
 </html>
