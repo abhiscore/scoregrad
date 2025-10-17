@@ -3,12 +3,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebas
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-// Firebase configuration (your project)
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
   authDomain: "myscoregrad.firebaseapp.com",
   projectId: "myscoregrad",
-  storageBucket: "myscoregrad.appspot.com", // corrected
+  storageBucket: "myscoregrad.appspot.com",
   messagingSenderId: "554437460327",
   appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
   measurementId: "G-LXD6GJ09PC"
@@ -19,13 +19,11 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Protect dashboard: only logged-in users can see content
+// Protect dashboard: only logged-in users
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    // Not logged in → redirect to login page
-    window.location.href = "index.html";
+    window.location.href = "index.html"; // redirect if not logged in
   } else {
-    // Logged in → fetch courses
     try {
       const coursesSnapshot = await getDocs(collection(db, "courses"));
       const coursesContainer = document.getElementById("courses");
@@ -36,11 +34,20 @@ onAuthStateChanged(auth, async (user) => {
         coursesContainer.innerHTML = ""; // clear previous content
         coursesSnapshot.forEach(doc => {
           const data = doc.data();
+          // Embed YouTube video using video ID
           coursesContainer.innerHTML += `
             <div class="course">
               <h3>${data.title}</h3>
               <p>${data.description}</p>
-              <a href="${data.videoUrl}" target="_blank">Watch</a>
+              <iframe 
+                width="100%" 
+                height="200" 
+                src="https://www.youtube.com/embed/${data.videoUrl}" 
+                title="${data.title}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
             </div>
           `;
         });
