@@ -31,7 +31,7 @@ onAuthStateChanged(auth, async (user) => {
       if (coursesSnapshot.empty) {
         coursesContainer.innerHTML = "<p>No courses available yet.</p>";
       } else {
-        coursesContainer.innerHTML = ""; // clear previous content
+        coursesContainer.innerHTML = "";
         coursesSnapshot.forEach(doc => {
           const data = doc.data();
           coursesContainer.innerHTML += `
@@ -41,7 +41,6 @@ onAuthStateChanged(auth, async (user) => {
               <iframe 
                 src="https://www.youtube.com/embed/${data.videoUrl}" 
                 title="${data.title}" 
-                frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen>
               </iframe>
