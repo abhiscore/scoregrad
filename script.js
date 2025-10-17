@@ -17,9 +17,9 @@ function signup() {
   const password = document.getElementById('signup-password').value;
 
   auth.createUserWithEmailAndPassword(email, password)
-    .then(user => {
-      alert("Signed up successfully!");
-      window.location.href = "dashboard.html";
+    .then(() => {
+      alert("Signup successful!");
+      // Do NOT redirect here
     })
     .catch(err => alert(err.message));
 }
@@ -30,13 +30,10 @@ function login() {
   const password = document.getElementById('login-password').value;
 
   auth.signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Successful login
+    .then(() => {
+      // Just show a message
       alert("Login successful!");
-      // Redirect after a tiny delay to ensure alert closes first
-      setTimeout(() => {
-        window.location.href = "dashboard.html";
-      }, 100);
+      // Do NOT redirect here
     })
-    .catch((err) => alert(err.message));
+    .catch(err => alert(err.message));
 }
