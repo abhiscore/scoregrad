@@ -1,48 +1,46 @@
-// Firebase config (paste your config here)
+// Import Firebase modular SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
   authDomain: "myscoregrad.firebaseapp.com",
   projectId: "myscoregrad",
-  storageBucket: "myscoregrad.firebasestorage.app",
+  storageBucket: "myscoregrad.appspot.com", // corrected
   messagingSenderId: "554437460327",
   appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
   measurementId: "G-LXD6GJ09PC"
 };
-firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-// Signup function
-function signup() {
+// Signup
+window.signup = function() {
   const email = document.getElementById('signup-email').value;
   const password = document.getElementById('signup-password').value;
 
-  auth.createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      alert("Signup successful!");
-      // Do NOT redirect here
-    })
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(() => alert("Signup successful!"))
     .catch(err => alert(err.message));
-}
+};
 
-// Login function
-function login() {
+// Login
+window.login = function() {
   const email = document.getElementById('login-email').value;
   const password = document.getElementById('login-password').value;
 
-  auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
-      // Just show a message
-      alert("Login successful!");
-      // Do NOT redirect here
-    })
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => alert("Login successful!"))
     .catch(err => alert(err.message));
-}
+};
 
-// Listen for auth state changes
-auth.onAuthStateChanged(user => {
+// Redirect logged-in users automatically to dashboard
+onAuthStateChanged(auth, user => {
   if (user) {
-    // User is logged in, redirect to dashboard if on index.html
+    // Redirect if on index page
     if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
       window.location.href = "dashboard.html";
     }
