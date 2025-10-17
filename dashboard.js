@@ -1,8 +1,9 @@
+// Import Firebase modular SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-// Firebase config
+// Firebase configuration (your project)
 const firebaseConfig = {
   apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
   authDomain: "myscoregrad.firebaseapp.com",
@@ -18,21 +19,24 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Protect dashboard: only logged-in users
+// Protect dashboard: only logged-in users can see content
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    // Not logged in → redirect
+    // Not logged in → redirect to login page
     window.location.href = "index.html";
   } else {
-    // Fetch courses for logged-in users
+    // Logged in → fetch courses
     try {
       const coursesSnapshot = await getDocs(collection(db, "courses"));
+      const coursesContainer = document.getElementById("courses");
+
       if (coursesSnapshot.empty) {
-        document.getElementById("courses").innerHTML = "<p>No courses available yet.</p>";
+        coursesContainer.innerHTML = "<p>No courses available yet.</p>";
       } else {
+        coursesContainer.innerHTML = ""; // clear previous content
         coursesSnapshot.forEach(doc => {
           const data = doc.data();
-          document.getElementById("courses").innerHTML += `
+          coursesContainer.innerHTML += `
             <div class="course">
               <h3>${data.title}</h3>
               <p>${data.description}</p>
@@ -41,6 +45,8 @@ onAuthStateChanged(auth, async (user) => {
           `;
         });
       }
+
+      console.log("Fetched courses:", coursesSnapshot.docs.length);
     } catch (err) {
       console.error("Error fetching courses:", err);
       document.getElementById("courses").innerHTML = "<p>Failed to load courses.</p>";
@@ -50,8 +56,13 @@ onAuthStateChanged(auth, async (user) => {
 
 // Logout function
 window.logout = function() {
-  signOut(auth).then(() => {
-    alert("Logged out!");
-    window.location.href = "index.html";
-  });
+  signOut(auth)
+    .then(() => {
+      alert("Logged out successfully!");
+      window.location.href = "index.html";
+    })
+    .catch(err => {
+      console.error("Logout error:", err);
+      alert("Error logging out. Try again.");
+    });
 };
