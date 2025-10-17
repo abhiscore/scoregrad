@@ -37,3 +37,13 @@ function login() {
     })
     .catch(err => alert(err.message));
 }
+
+// Listen for auth state changes
+auth.onAuthStateChanged(user => {
+  if (user) {
+    // User is logged in, redirect to dashboard if on index.html
+    if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
+      window.location.href = "dashboard.html";
+    }
+  }
+});
