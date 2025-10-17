@@ -3,35 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - ScoreGrad</title>
+  <title>Login / Signup - ScoreGrad</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="logo">ScoreGrad</div>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html" class="active">Login</a></li>
-    </ul>
-  </nav>
+  <div class="auth-container">
+    <h2>Login / Signup</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <div class="buttons">
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn">Signup</button>
+    </div>
+    <div id="authMessage"></div>
+  </div>
 
-  <section class="form-container">
-    <h2>Login</h2>
-    <input type="email" placeholder="Email" id="email">
-    <input type="password" placeholder="Password" id="password">
-    <button onclick="login()">Login</button>
-  </section>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-  <footer>
-    &copy; 2025 ScoreGrad. All Rights Reserved.
-  </footer>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
+      authDomain: "myscoregrad.firebaseapp.com",
+      projectId: "myscoregrad",
+      storageBucket: "myscoregrad.firebasestorage.app",
+      messagingSenderId: "554437460327",
+      appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
+      measurementId: "G-LXD6GJ09PC"
+    };
 
-  <script>
-    function login() {
-      alert("This will be Firebase login later.");
-    }
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const emailField = document.getElementById("email");
+    const passwordField = document.getElementById("password");
+    const authMessage = document.getElementById("authMessage");
+
+    // LOGIN
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const email = emailField.value;
+      const password = passwordField.value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          authMessage.style.color = "green";
+          authMessage.textContent = "Login successful!";
+          setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
+        })
+        .catch(error => {
+          authMessage.style.color = "red";
+          authMessage.textContent = error.message;
+        });
+    });
+
+    // SIGNUP
+    document.getElementById("signupBtn").addEventListener("click", () => {
+      const email = emailField.value;
+      const password = passwordField.value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          authMessage.style.color = "green";
+          authMessage.textContent = "Signup successful! Redirecting...";
+          setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
+        })
+        .catch(error => {
+          authMessage.style.color = "red";
+          authMessage.textContent = error.message;
+        });
+    });
   </script>
 </body>
 </html>
