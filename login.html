@@ -39,13 +39,12 @@
     const passwordField = document.getElementById("password");
     const authMessage = document.getElementById("authMessage");
 
-    // LOGIN
     document.getElementById("loginBtn").addEventListener("click", () => {
       const email = emailField.value;
       const password = passwordField.value;
 
       signInWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
+        .then(() => {
           authMessage.style.color = "green";
           authMessage.textContent = "Login successful!";
           setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
@@ -56,13 +55,12 @@
         });
     });
 
-    // SIGNUP
     document.getElementById("signupBtn").addEventListener("click", () => {
       const email = emailField.value;
       const password = passwordField.value;
 
       createUserWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
+        .then(() => {
           authMessage.style.color = "green";
           authMessage.textContent = "Signup successful! Redirecting...";
           setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
