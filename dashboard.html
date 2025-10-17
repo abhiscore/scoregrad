@@ -4,26 +4,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ScoreGrad Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <style>
+    body {
+      margin:0;
+      font-family:"Poppins",sans-serif;
+      background:#f1f3f6;
+    }
+    nav {
+      background:#0078ff;
+      color:#fff;
+      padding:15px 20px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    nav h1 { margin:0; font-size:1.5em; }
+    nav button {
+      background:#fff; color:#0078ff; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:600;
+    }
+    .container { padding:20px; display:grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+    .card {
+      background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); overflow:hidden;
+    }
+    .card iframe { width:100%; height:200px; border:none; }
+    .card h3 { padding:10px; color:#0078ff; }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="logo">ScoreGrad</div>
-    <button id="logoutBtn" class="btn">Logout</button>
-  </header>
-
-  <section class="dashboard">
-    <h2>Welcome to your Dashboard!</h2>
-    <div class="course-cards">
-      <div class="card">📘 Learn Physics from Scratch</div>
-      <div class="card">💻 Learn Python Programming</div>
-      <div class="card">📊 Financial Literacy</div>
-      <div class="card">🧠 Logical Reasoning</div>
+  <nav>
+    <h1>ScoreGrad Dashboard</h1>
+    <button id="logoutBtn">Logout</button>
+  </nav>
+  <div class="container">
+    <div class="card">
+      <iframe src="https://www.youtube.com/embed/HYb4FGDTBmw" allowfullscreen></iframe>
+      <h3>Learn Physics from Scratch</h3>
     </div>
-  </section>
+    <!-- You can copy .card div to add more videos -->
+  </div>
 
-  <script src="https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js"></script>
-  <script src="script.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
+      authDomain: "myscoregrad.firebaseapp.com",
+      projectId: "myscoregrad",
+      storageBucket: "myscoregrad.appspot.com",
+      messagingSenderId: "554437460327",
+      appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
+      measurementId: "G-LXD6GJ09PC"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Redirect to login if not logged in
+    onAuthStateChanged(auth, user => {
+      if(!user) window.location.href = "login.html";
+    });
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
+  </script>
 </body>
 </html>
