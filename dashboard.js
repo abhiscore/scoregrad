@@ -1,78 +1,86 @@
+// =================== FIREBASE AUTH CHECK ===================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
   authDomain: "myscoregrad.firebaseapp.com",
   projectId: "myscoregrad",
-  storageBucket: "myscoregrad.appspot.com",
+  storageBucket: "myscoregrad.firebasestorage.app",
   messagingSenderId: "554437460327",
   appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
   measurementId: "G-LXD6GJ09PC"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-// Protect dashboard
-onAuthStateChanged(auth, async (user) => {
-  if (!user) window.location.href = "index.html";
-  else loadCourses();
+// Protect the page
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("username").textContent = user.email.split("@")[0];
+  } else {
+    window.location.href = "index.html";
+  }
 });
 
-// Logout
-window.logout = function() {
-  signOut(auth).then(() => window.location.href = "index.html");
+// =================== LOGOUT ===================
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  signOut(auth).then(() => {
+    alert("Logged out successfully!");
+    window.location.href = "index.html";
+  }).catch((error) => {
+    alert("Error logging out: " + error.message);
+  });
+});
+
+// =================== THEME TOGGLE ===================
+const themeBtn = document.getElementById("themeToggle");
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("light-mode");
+  const mode = document.body.classList.contains("light-mode") ? "Light" : "Dark";
+  themeBtn.innerHTML = mode === "Light" ? "🌞" : "🌙";
+  localStorage.setItem("theme", mode);
+});
+
+// Load saved theme on refresh
+window.onload = () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "Light") {
+    document.body.classList.add("light-mode");
+    themeBtn.innerHTML = "🌞";
+  } else {
+    document.body.classList.remove("light-mode");
+    themeBtn.innerHTML = "🌙";
+  }
 };
 
-// Load courses dynamically
-async function loadCourses() {
-  const coursesContainer = document.getElementById("courses");
-  coursesContainer.innerHTML = "";
-  try {
-    const snapshot = await getDocs(collection(db, "courses"));
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      const card = document.createElement("div");
-      card.className = "course";
-      card.innerHTML = `
-        <img src="https://img.youtube.com/vi/${data.videoUrl}/hqdefault.jpg" alt="${data.title}">
-        <div class="course-content">
-          <h3>${data.title}</h3>
-          <p>${data.description}</p>
-          <button onclick="openModal('${data.videoUrl}')">Play</button>
-        </div>
-      `;
-      coursesContainer.appendChild(card);
-    });
-  } catch(err) {
-    coursesContainer.innerHTML = "<p>Failed to load courses.</p>";
-    console.error(err);
+// =================== LIVE CLASS COUNTDOWN ===================
+function updateCountdown() {
+  const target = new Date();
+  target.setHours(20, 0, 0, 0); // Next live at 8:00 PM
+  const now = new Date();
+  const diff = target - now;
+
+  if (diff <= 0) {
+    document.getElementById("liveTimer").textContent = "Live Now 🔴";
+    return;
   }
+
+  const hrs = Math.floor(diff / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+  document.getElementById("liveTimer").textContent = `${hrs}h ${mins}m ${secs}s`;
 }
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
-// Video modal
-const modal = document.getElementById("video-modal");
-const modalVideo = document.getElementById("modal-video");
-const closeBtn = document.querySelector(".close-btn");
-
-window.openModal = function(videoId) {
-  modalVideo.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-  modal.style.display = "flex";
-};
-
-closeBtn.onclick = function() {
-  modalVideo.src = "";
-  modal.style.display = "none";
-};
-
-window.onclick = function(e) {
-  if(e.target == modal) {
-    modalVideo.src = "";
-    modal.style.display = "none";
-  }
-};
+// =================== PROGRESS SIMULATION ===================
+let progress = 0;
+function animateProgress() {
+  const bar = document.getElementById("progressBar");
+  progress += 1;
+  if (progress > 70) return; // show 70% complete
+  bar.style.width = `${progress}%`;
+}
+setInterval(animateProgress, 80);
