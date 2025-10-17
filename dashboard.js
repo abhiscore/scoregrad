@@ -34,14 +34,11 @@ onAuthStateChanged(auth, async (user) => {
         coursesContainer.innerHTML = ""; // clear previous content
         coursesSnapshot.forEach(doc => {
           const data = doc.data();
-          // Embed YouTube video using video ID
           coursesContainer.innerHTML += `
             <div class="course">
               <h3>${data.title}</h3>
               <p>${data.description}</p>
               <iframe 
-                width="100%" 
-                height="200" 
                 src="https://www.youtube.com/embed/${data.videoUrl}" 
                 title="${data.title}" 
                 frameborder="0" 
