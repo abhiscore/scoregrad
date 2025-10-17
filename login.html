@@ -29,14 +29,15 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "myscoregrad.firebaseapp.com",
-      projectId: "myscoregrad",
-      storageBucket: "myscoregrad.appspot.com",
-      messagingSenderId: "554437460327",
-      appId: "1:554437460327:web:321114cbd97018ef9c6fc2"
-    };
+const firebaseConfig = {
+    apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
+    authDomain: "myscoregrad.firebaseapp.com",
+    projectId: "myscoregrad",
+    storageBucket: "myscoregrad.firebasestorage.app",
+    messagingSenderId: "554437460327",
+    appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
+    measurementId: "G-LXD6GJ09PC"
+  };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
