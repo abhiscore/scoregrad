@@ -1,44 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScoreGrad - Learn. Grow. Achieve.</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScoreGrad | Learn Smarter, Not Harder</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #0f0f10;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      color: #00c8ff;
+      font-weight: 700;
+      font-size: 1.6rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00c8ff;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, #0a0a0a, #1f2937);
+    }
+
+    .hero h2 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      color: #00c8ff;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .btn-container {
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: #00c8ff;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #0099cc;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-8px);
+    }
+
+    .feature h3 {
+      color: #00c8ff;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <div class="logo">ScoreGrad</div>
+    <h1>ScoreGrad</h1>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#courses">Courses</a>
-      <a href="#about">About</a>
-      <a href="login.html" class="btn">Login / Signup</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
     </nav>
   </header>
 
-  <section id="home" class="hero">
-    <div class="hero-text">
-      <h1>Learn. Grow. Achieve.</h1>
-      <p>Interactive courses, live classes, and premium content for your success.</p>
-      <a href="login.html" class="btn hero-btn">Join Now</a>
+  <section class="hero">
+    <h2>Learn Smarter, Not Harder</h2>
+    <p>Welcome to ScoreGrad — your modern learning hub designed to simplify complex topics, empower growth, and bring education to your fingertips.</p>
+    <div class="btn-container">
+      <a href="login.html"><button class="btn">Login</button></a>
+      <a href="signup.html"><button class="btn">Sign Up</button></a>
     </div>
   </section>
 
-  <section id="courses">
-    <h2>Our Courses</h2>
-    <div class="course-cards">
-      <div class="card">NEET Crash Course</div>
-      <div class="card">Python Programming</div>
-      <div class="card">Financial Literacy</div>
-      <div class="card">Logical Reasoning</div>
+  <section class="features">
+    <div class="feature">
+      <h3>Interactive Learning</h3>
+      <p>Watch, learn, and practice with immersive content built for real results.</p>
+    </div>
+    <div class="feature">
+      <h3>Expert Mentors</h3>
+      <p>Get guided by India’s best educators and top performers from your field.</p>
+    </div>
+    <div class="feature">
+      <h3>AI-Powered Dashboard</h3>
+      <p>Track your performance and unlock personalized study plans.</p>
     </div>
   </section>
 
   <footer>
-    <p>© 2025 ScoreGrad. All Rights Reserved.</p>
+    © 2025 ScoreGrad. All rights reserved.
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
