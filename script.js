@@ -1,48 +1,43 @@
-// Import Firebase modular SDK
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-
 // Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
+  apiKey: "YOUR_API_KEY",
   authDomain: "myscoregrad.firebaseapp.com",
   projectId: "myscoregrad",
-  storageBucket: "myscoregrad.appspot.com", // corrected
+  storageBucket: "myscoregrad.appspot.com",
   messagingSenderId: "554437460327",
-  appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
-  measurementId: "G-LXD6GJ09PC"
+  appId: "1:554437460327:web:321114cbd97018ef9c6fc2"
 };
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+// Login / Signup
+const loginBtn = document.getElementById('loginBtn');
+if(loginBtn){
+  loginBtn.addEventListener('click', ()=>{
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    auth.signInWithEmailAndPassword(email,password)
+      .then(user=>window.location.href="dashboard.html")
+      .catch(err=>{
+        // If user not exist, create account
+        auth.createUserWithEmailAndPassword(email,password)
+          .then(user=>window.location.href="dashboard.html")
+          .catch(err2=>document.getElementById('status').innerText=err2.message)
+      })
+  })
+}
 
-// Signup
-window.signup = function() {
-  const email = document.getElementById('signup-email').value;
-  const password = document.getElementById('signup-password').value;
+// Protect Dashboard
+if(window.location.href.includes("dashboard.html")){
+  auth.onAuthStateChanged(user=>{
+    if(!user) window.location.href="login.html";
+  })
+}
 
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Signup successful!"))
-    .catch(err => alert(err.message));
-};
-
-// Login
-window.login = function() {
-  const email = document.getElementById('login-email').value;
-  const password = document.getElementById('login-password').value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => alert("Login successful!"))
-    .catch(err => alert(err.message));
-};
-
-// Redirect logged-in users automatically to dashboard
-onAuthStateChanged(auth, user => {
-  if (user) {
-    // Redirect if on index page
-    if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
-      window.location.href = "dashboard.html";
-    }
-  }
-});
+// Logout
+const logoutBtn = document.getElementById('logoutBtn');
+if(logoutBtn){
+  logoutBtn.addEventListener('click', ()=>{
+    auth.signOut().then(()=>window.location.href="index.html");
+  })
+}
