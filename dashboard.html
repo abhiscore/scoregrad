@@ -4,81 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - ScoreGrad</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #1e1e2f, #3a3a5e);
-      color: #fff;
-      padding: 20px;
-    }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    #logout-btn {
-      display: block;
-      margin: 0 auto 30px auto;
-      padding: 10px 20px;
-      background: #ff6b6b;
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    #logout-btn:hover {
-      background: #ff4757;
-    }
-
-    #courses {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 15px;
-      justify-items: center;
-    }
-
-    .course {
-  background: rgba(255,255,255,0.1);
-  padding: 20px;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 420px;   /* prevent card from being too wide */
-  text-align: center;
-  transition: transform 0.2s;
-}
-
-
-    .course:hover {
-      transform: scale(1.05);
-    }
-
-    .course h3 {
-      margin-bottom: 10px;
-    }
-
-    .course iframe {
-  width: 100%;
-  max-width: 400px;
-  height: 200px;
-  border-radius: 10px;
-  display: block;
-  margin: 0 auto;
-}
-
-
-  </style>
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
+
   <h1>Dashboard</h1>
   <button id="logout-btn" onclick="logout()">Logout</button>
 
   <div id="courses">
-    <!-- Courses will load here -->
+    <!-- Courses will be loaded dynamically here -->
   </div>
 
+  <!-- Firebase + dashboard script -->
   <script type="module" src="dashboard.js"></script>
+
 </body>
 </html>
