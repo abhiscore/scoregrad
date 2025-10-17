@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login | ScoreGrad</title>
-<link rel="stylesheet" href="style.css">
-<script type="module" src="login.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ScoreGrad</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<header class="navbar">
-  <div class="logo">ScoreGrad</div>
-  <nav>
+  <nav class="navbar">
+    <div class="logo">ScoreGrad</div>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html" class="active btn-nav">Login</a></li>
+      <li><a href="login.html" class="active">Login</a></li>
     </ul>
   </nav>
-</header>
 
-<section>
-  <h2>Login</h2>
-  <div class="form-container">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <button class="btn" onclick="login()">Login</button>
-  </div>
-</section>
+  <section class="form-container">
+    <h2>Login</h2>
+    <input type="email" placeholder="Email" id="email">
+    <input type="password" placeholder="Password" id="password">
+    <button onclick="login()">Login</button>
+  </section>
 
-<footer>
-  <p>© 2025 ScoreGrad. All rights reserved.</p>
-</footer>
+  <footer>
+    &copy; 2025 ScoreGrad. All Rights Reserved.
+  </footer>
 
+  <script>
+    function login() {
+      alert("This will be Firebase login later.");
+    }
+  </script>
 </body>
 </html>
