@@ -1,28 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - ScoreGrad</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScoreGrad Dashboard</title>
 
-  <!-- Google Fonts for professional look -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Link external CSS -->
-  <link rel="stylesheet" href="dashboard.css">
+<!-- External CSS -->
+<link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
 
-  <header>
-    <h1>ScoreGrad Dashboard</h1>
+<header>
+  <div class="logo">ScoreGrad</div>
+  <nav>
+    <a href="#">Dashboard</a>
+    <a href="#">Courses</a>
+    <a href="#">Profile</a>
     <button id="logout-btn" onclick="logout()">Logout</button>
-  </header>
+  </nav>
+</header>
 
-  <main id="courses">
-    <!-- Dynamic course cards will load here -->
-  </main>
+<main>
+  <!-- Featured Courses Carousel (optional) -->
+  <section id="featured-courses">
+    <h2>Featured Courses</h2>
+    <div class="carousel">
+      <!-- Dynamically inserted featured courses -->
+    </div>
+  </section>
 
-  <!-- Firebase + Dashboard Script -->
-  <script type="module" src="dashboard.js"></script>
+  <!-- All Courses Grid -->
+  <section id="courses">
+    <!-- Dynamically inserted course cards -->
+  </section>
+</main>
+
+<!-- Video Modal -->
+<div id="video-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- Firebase + JS -->
+<script type="module" src="dashboard.js"></script>
 </body>
 </html>
