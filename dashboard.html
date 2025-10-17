@@ -1,84 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ScoreGrad Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css">
+
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="dashboard.css" />
+
+  <!-- Firebase CDN -->
+  <script type="module" src="dashboard.js" defer></script>
 </head>
 <body>
-  <div class="dashboard-container">
-    <aside class="sidebar">
-      <h2 class="logo">📘 ScoreGrad</h2>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div>
+      <div class="logo">⚡ ScoreGrad</div>
       <ul class="menu">
-        <li class="active">🏠 Home</li>
-        <li>📚 Courses</li>
+        <li class="active">🏠 Dashboard</li>
+        <li>📚 My Courses</li>
         <li>📝 Notes</li>
-        <li>📈 Progress</li>
-        <li>🎥 Live Class</li>
-        <li>⚙️ Settings</li>
+        <li>🎯 Progress</li>
+        <li>🔴 Live Classes</li>
+        <li>☎ Contact</li>
       </ul>
-      <button id="logoutBtn" class="logout-btn">Logout</button>
-    </aside>
+    </div>
 
-    <main class="main-content">
-      <header class="header">
-        <div class="profile">
-          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" />
-          <div>
-            <h3 id="userName">Welcome, Student</h3>
-            <p>Let's learn something new today!</p>
-          </div>
-        </div>
-        <button id="themeToggle" class="theme-btn">🌙</button>
-      </header>
-
-      <section class="continue-section">
-        <h2>▶ Continue Watching</h2>
-        <div class="video-card">
-          <iframe src="https://www.youtube.com/embed/HYb4FGDTBmw" allowfullscreen></iframe>
-        </div>
-      </section>
-
-      <section class="course-section">
-        <h2>📘 Learn Physics from Scratch</h2>
-        <div class="video-grid">
-          <iframe src="https://www.youtube.com/embed/HYb4FGDTBmw" allowfullscreen></iframe>
-          <iframe src="https://www.youtube.com/embed/GNrdg3PzpJQ" allowfullscreen></iframe>
-          <iframe src="https://www.youtube.com/embed/zsXOFPsZ7B0" allowfullscreen></iframe>
-          <iframe src="https://www.youtube.com/embed/KtQw5zpt3cA" allowfullscreen></iframe>
-          <iframe src="https://www.youtube.com/embed/6YLe3t4xhTg" allowfullscreen></iframe>
-        </div>
-      </section>
-
-      <section class="notes-section">
-        <h2>📝 Notes & PDFs</h2>
-        <ul>
-          <li><a href="#">Physics Chapter 1 - Units & Measurements (PDF)</a></li>
-          <li><a href="#">Physics Chapter 2 - Motion in One Dimension (PDF)</a></li>
-          <li><a href="#">Physics Chapter 3 - Laws of Motion (PDF)</a></li>
-        </ul>
-      </section>
-
-      <section class="progress-section">
-        <h2>📈 Your Progress</h2>
-        <div class="progress-bar">
-          <div class="progress" style="width: 45%;"></div>
-        </div>
-        <p>45% Completed</p>
-      </section>
-
-      <section class="live-section">
-        <h2>🎥 Upcoming Live Class</h2>
-        <div class="live-card">
-          <p><strong>Topic:</strong> Newton’s Laws of Motion</p>
-          <p><strong>Starts in:</strong> <span id="countdown">Loading...</span></p>
-        </div>
-      </section>
-    </main>
+    <button id="logoutBtn" class="logout-btn">Logout</button>
   </div>
 
-  <script type="module" src="firebase-config.js"></script>
-  <script type="module" src="dashboard.js"></script>
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="profile">
+        <img src="https://i.ibb.co/NZJz8qK/avatar.png" alt="User">
+        <h3 id="username">User</h3>
+      </div>
+      <button id="themeToggle" class="theme-btn">🌙</button>
+    </div>
+
+    <!-- CONTINUE WATCHING -->
+    <div class="continue-section">
+      <h2>Continue Watching</h2>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/HYb4FGDTBmw" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- MY COURSES -->
+    <div class="course-section">
+      <h2>Learn Physics from Scratch</h2>
+      <div class="video-grid">
+        <iframe src="https://www.youtube.com/embed/qz0aGYrrlhU" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/nKIu9yen5nc" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/mU6anWqZJcc" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/PkZNo7MFNFg" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/HYb4FGDTBmw" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/UB1O30fR-EE" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- NOTES SECTION -->
+    <div class="notes-section">
+      <h2>Notes & PDFs</h2>
+      <ul>
+        <li><a href="#" download>📄 Physics Chapter 1 Notes</a></li>
+        <li><a href="#" download>📄 Physics Chapter 2 Notes</a></li>
+        <li><a href="#" download>📄 Chemistry Formula Sheet</a></li>
+        <li><a href="#" download>📄 Biology Diagrams PDF</a></li>
+      </ul>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress-section">
+      <h2>Course Progress</h2>
+      <div class="progress-bar"><div id="progressBar" class="progress"></div></div>
+      <p>70% Completed</p>
+    </div>
+
+    <!-- LIVE CLASSES -->
+    <div class="live-section">
+      <h2>Upcoming Live Class</h2>
+      <div class="live-card">
+        <p><strong>Topic:</strong> Newton’s Laws of Motion</p>
+        <p><strong>Time:</strong> 8:00 PM Today</p>
+        <p id="liveTimer">Loading...</p>
+      </div>
+    </div>
+
+  </div>
+
 </body>
 </html>
