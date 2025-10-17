@@ -30,9 +30,13 @@ function login() {
   const password = document.getElementById('login-password').value;
 
   auth.signInWithEmailAndPassword(email, password)
-    .then(user => {
-      alert("Logged in successfully!");
-      window.location.href = "dashboard.html";
+    .then((userCredential) => {
+      // Successful login
+      alert("Login successful!");
+      // Redirect after a tiny delay to ensure alert closes first
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 100);
     })
-    .catch(err => alert(err.message));
+    .catch((err) => alert(err.message));
 }
