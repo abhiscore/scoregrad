@@ -1,11 +1,12 @@
 // Firebase config (paste your config here)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
+  authDomain: "myscoregrad.firebaseapp.com",
+  projectId: "myscoregrad",
+  storageBucket: "myscoregrad.firebasestorage.app",
+  messagingSenderId: "554437460327",
+  appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
+  measurementId: "G-LXD6GJ09PC"
 };
 firebase.initializeApp(firebaseConfig);
 
