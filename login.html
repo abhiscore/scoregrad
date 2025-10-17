@@ -6,13 +6,33 @@
   <title>ScoreGrad - Login / Signup</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body { display:flex; justify-content:center; align-items:center; height:100vh; background:linear-gradient(135deg,#0078ff,#00bfff); font-family:"Poppins",sans-serif; }
-    .login-box { background:#fff; padding:40px; border-radius:12px; width:350px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.2); }
-    .login-box h2 { margin-bottom:20px; color:#0078ff; }
-    .login-box input { width:100%; padding:12px; margin:10px 0; border-radius:6px; border:1px solid #ccc; }
-    .login-box .btn { width:100%; padding:12px; background:#0078ff; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600; }
-    .login-box .btn:hover { background:#005fcc; }
-    #status { margin-top:10px; color:red; font-size:0.9em; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg,#0078ff,#00bfff);
+      font-family: "Poppins", sans-serif;
+    }
+    .login-box {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .login-box h2 { margin-bottom: 20px; color: #0078ff; }
+    .login-box input {
+      width: 100%; padding: 12px; margin: 10px 0;
+      border-radius: 6px; border: 1px solid #ccc;
+    }
+    .login-box .btn {
+      width: 100%; padding: 12px; background: #0078ff;
+      color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;
+    }
+    .login-box .btn:hover { background: #005fcc; }
+    #status { margin-top: 10px; color: red; font-size: 0.9em; }
   </style>
 </head>
 <body>
@@ -24,20 +44,19 @@
     <p id="status"></p>
   </div>
 
-  <!-- Firebase SDK v12 (module) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw",
-    authDomain: "myscoregrad.firebaseapp.com",
-    projectId: "myscoregrad",
-    storageBucket: "myscoregrad.firebasestorage.app",
-    messagingSenderId: "554437460327",
-    appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
-    measurementId: "G-LXD6GJ09PC"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyDigcQvQOLbGWmJv_QpFPMPzB7-qzD1drw", // ✅ your API key
+      authDomain: "myscoregrad.firebaseapp.com",
+      projectId: "myscoregrad",
+      storageBucket: "myscoregrad.appspot.com", // ✅ corrected
+      messagingSenderId: "554437460327",
+      appId: "1:554437460327:web:321114cbd97018ef9c6fc2",
+      measurementId: "G-LXD6GJ09PC"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -58,15 +77,15 @@ const firebaseConfig = {
         await signInWithEmailAndPassword(auth, email, password);
         status.style.color = "green";
         status.innerText = "Login successful!";
-        window.location.href = "dashboard.html"; // redirect after login
+        window.location.href = "dashboard.html";
       } catch (err) {
-        // If user not found, create new account
         try {
           await createUserWithEmailAndPassword(auth, email, password);
           status.style.color = "green";
           status.innerText = "Account created & logged in!";
           window.location.href = "dashboard.html";
         } catch (err2){
+          status.style.color = "red";
           status.innerText = err2.message;
         }
       }
